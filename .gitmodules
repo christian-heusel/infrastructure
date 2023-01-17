@@ -1,0 +1,3 @@
+[submodule "plugins/lookup/ansible-lookup-plugin-gopass"]
+	path = plugins/lookup/ansible-lookup-plugin-gopass
+	url = https://github.com/christian-heusel/ansible-lookup-plugin-gopass.git
