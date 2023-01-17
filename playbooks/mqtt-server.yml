@@ -1,0 +1,4 @@
+---
+- hosts: mqtt_server
+  roles:
+    - mqtt

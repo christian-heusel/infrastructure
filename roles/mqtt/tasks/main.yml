@@ -1,0 +1,8 @@
+---
+# tasks file for mqtt
+- name: create the pskfile
+  ansible.builtin.template:
+    src: pskfile.j2
+    dest: "{{ (mosquitto_docker_project_dir, 'pskfile') | path_join }}"
+  notify:
+    - update the passwdfile

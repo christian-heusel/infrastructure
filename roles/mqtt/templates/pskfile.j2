@@ -1,0 +1,3 @@
+{% for password_path in lookup('gopass', 'heuselfamily/mqtt', list=True) | sort %}
+{{ password_path | basename }}:{{ lookup('gopass', password_path) }}
+{% endfor %}

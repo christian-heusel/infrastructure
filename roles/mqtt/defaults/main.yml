@@ -1,0 +1,3 @@
+---
+# defaults file for mqtt
+mosquitto_docker_project_dir: /opt/docker/mosquitto-docker

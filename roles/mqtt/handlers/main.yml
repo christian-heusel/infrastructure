@@ -1,0 +1,27 @@
+---
+# handlers file for mqtt
+
+- name: copy the passwdfile
+  ansible.builtin.copy:
+    src: "{{ (mosquitto_docker_project_dir, 'pskfile') | path_join }}"
+    dest: "{{ (mosquitto_docker_project_dir, 'passwd') | path_join }}"
+    remote_src: true
+  listen:
+    - update the passwdfile
+
+- name: update the passwdfile hashes
+  ansible.builtin.command:
+    cmd: mosquitto_passwd -U passwd
+    chdir: "{{ mosquitto_docker_project_dir }}"
+  listen:
+    - update the passwdfile
+  notify:
+    - restart mosquitto
+
+- name: restart mosquitto
+  community.docker.docker_compose:
+    project_src: "{{ mosquitto_docker_project_dir }}"
+    state: present
+    restarted: true
+  listen:
+    - restart mosquitto
