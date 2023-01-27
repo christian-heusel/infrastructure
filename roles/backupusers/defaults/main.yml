@@ -1,0 +1,4 @@
+---
+backup_path: "/backups"
+backup_zfs_dataset: "tank/backups"
+backup_reponame: "repository"

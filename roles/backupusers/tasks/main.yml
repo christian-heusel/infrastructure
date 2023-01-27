@@ -1,0 +1,67 @@
+---
+- name: adding user for each host
+  user:
+    name: "{{ item }}"
+    createhome: false
+    home: "{{ backup_path }}/{{ item }}"
+    comment: Backup user for {{ item }}
+  with_items: "{{ groups['all'] }}"
+
+- name: forcing borg server command for backup users
+  blockinfile:
+    path: /etc/ssh/sshd_config
+    block: |
+      Match User {{ item }}
+      ForceCommand /usr/bin/borg serve --restrict-to-path {{ backup_path }}/{{ item }}/{{ backup_reponame }} --append-only
+    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item }}"
+  with_items: "{{ groups['all'] }}"
+  notify: restart_ssh
+
+- name: Create a new file system called myfs in pool rpool with the setuid property turned off
+  community.general.zfs:
+    name: "{{ backup_zfs_dataset }}/{{ item }}"
+    state: present
+  with_items: "{{ groups['all'] }}"
+
+- name: creating backup repositories
+  file:
+    path: "{{ backup_path }}/{{ item }}/{{ backup_reponame }}"
+    state: directory
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0755
+  with_items: "{{ groups['all'] }}"
+
+- name: creating ssh config directories
+  file:
+    path: "{{ backup_path }}/{{ item }}/.ssh"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items: "{{ groups['all'] }}"
+
+- name: create ssh public keys on the servers
+  command:
+    cmd: ssh-keygen -q -t rsa -f /root/.ssh/id_rsa.pub -C "" -N ""
+    creates: /root/.ssh/id_rsa.pub
+  delegate_to: "{{ item }}"
+  with_items: "{{ groups['all'] }}"
+
+- name: fetching ssh public keys from servers
+  fetch:
+    src: /root/.ssh/id_rsa.pub
+    dest: /tmp/{{ item }}.pub
+    flat: true
+  changed_when: false
+  delegate_to: "{{ item }}"
+  with_items: "{{ groups['all'] }}"
+
+- name: deploying ssh keys
+  copy:
+    src: /tmp/{{ item }}.pub
+    dest: "{{ backup_path }}/{{ item }}/.ssh/authorized_keys"
+    owner: root
+    group: root
+    mode: 0644
+  with_items: "{{ groups['all'] }}"
