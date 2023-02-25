@@ -1,0 +1,32 @@
+---
+version: "3"
+services:
+  mqtt:
+    image: eclipse-mosquitto
+    ports:
+      - 1883:1883
+      - 9001:9001
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./passwd:/mosquitto/config/passwd
+    restart: unless-stopped
+
+  mosquitto-exporter:
+    image: sapcc/mosquitto-exporter
+    environment:
+      BROKER_ENDPOINT: "tcp://mqtt:1883"
+      MQTT_USER: mosquitto-exporter
+      MQTT_PASS: "{{ lookup('gopass', 'heuselfamily/mqtt/mosquitto-exporter') }}"
+    restart: unless-stopped
+
+  mqtt-exporter:
+    image: kpetrem/mqtt-exporter
+    environment:
+      MQTT_ADDRESS: mqtt
+      PROMETHEUS_PREFIX: mqtt_broker_
+      TOPIC_LABEL: sensor
+      MQTT_USERNAME: mqtt-exporter
+      MQTT_PASSWORD: "{{ lookup('gopass', 'heuselfamily/mqtt/mqtt-exporter') }}"
+    ports:
+      - 8999:9000
+    restart: unless-stopped
