@@ -61,7 +61,7 @@
   copy:
     src: /tmp/{{ item }}.pub
     dest: "{{ backup_path }}/{{ item }}/.ssh/authorized_keys"
-    owner: root
-    group: root
-    mode: 0644
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0444
   with_items: "{{ groups['all'] }}"
