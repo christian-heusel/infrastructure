@@ -17,7 +17,7 @@
   with_items: "{{ groups['all'] }}"
   notify: restart_ssh
 
-- name: Create a new file system called myfs in pool rpool with the setuid property turned off
+- name: create a new zfs dataset for the host
   community.general.zfs:
     name: "{{ backup_zfs_dataset }}/{{ item }}"
     state: present
