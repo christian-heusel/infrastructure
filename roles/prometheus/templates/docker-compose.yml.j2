@@ -1,0 +1,42 @@
+---
+version: "3"
+
+services:
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./config/prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=3y"
+      - "--storage.tsdb.retention.size=5GB"
+    ports:
+      - 9090:9090
+    restart: unless-stopped
+
+  # alertmanager:
+  #   image: prom/alertmanager
+  #   volumes:
+  #     - ./config/alertmanager/:/etc/alertmanager/
+  #   command:
+  #     - '--config.file=/etc/alertmanager/alertmanager.yml'
+  #     - "--web.external-url=https://alertmanager.vpn.heusel.eu"
+  #   ports:
+  #     - 9093:9093
+  #   restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - ./config/grafana/datasources:/etc/grafana/datasources
+      - ./config/grafana/dashboards:/etc/grafana/dashboards
+      - grafana_data:/var/lib/grafana
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+
+volumes:
+  prometheus_data:
+  grafana_data:

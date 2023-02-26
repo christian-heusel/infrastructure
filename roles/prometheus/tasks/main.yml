@@ -1,0 +1,18 @@
+---
+
+- name: create the docker-compose project
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ (prometheus_docker_project_dir, 'docker-compose.yml') | path_join }}"
+
+- name: create the prometheus config file
+  ansible.builtin.template:
+    src: prometheus.yml.j2
+    dest: "{{ (prometheus_docker_project_dir, 'config', 'prometheus', 'prometheus.yml') | path_join }}"
+  notify:
+    - restart prometheus
+
+- name: set up the docker-compose project
+  community.docker.docker_compose:
+    project_src: "{{ prometheus_docker_project_dir }}"
+    state: present

@@ -1,0 +1,3 @@
+---
+# defaults file for mqtt
+prometheus_docker_project_dir: /opt/docker/prometheus

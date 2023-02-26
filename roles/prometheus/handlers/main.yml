@@ -1,0 +1,9 @@
+---
+
+- name: restart prometheus
+  community.docker.docker_compose:
+    project_src: "{{ prometheus_docker_project_dir }}"
+    state: present
+    restarted: true
+  listen:
+    - restart prometheus
