@@ -13,7 +13,7 @@ services:
       - "--storage.tsdb.retention.time=3y"
       - "--storage.tsdb.retention.size=5GB"
     ports:
-      - 9090:9090
+      - 127.0.0.1:9090:9090
     restart: unless-stopped
 
   # alertmanager:
@@ -24,7 +24,7 @@ services:
   #     - '--config.file=/etc/alertmanager/alertmanager.yml'
   #     - "--web.external-url=https://alertmanager.vpn.heusel.eu"
   #   ports:
-  #     - 9093:9093
+  #     - 127.0.0.1:9093:9093
   #   restart: unless-stopped
 
   grafana:
@@ -34,7 +34,7 @@ services:
       - ./config/grafana/dashboards:/etc/grafana/dashboards
       - grafana_data:/var/lib/grafana
     ports:
-      - 3000:3000
+      - 127.0.0.1:3000:3000
     restart: unless-stopped
 
 volumes:
