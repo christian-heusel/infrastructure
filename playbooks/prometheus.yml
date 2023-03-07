@@ -1,4 +1,5 @@
 ---
 - hosts: prometheus_server
   roles:
+    - nextcloud-exporter
     - prometheus

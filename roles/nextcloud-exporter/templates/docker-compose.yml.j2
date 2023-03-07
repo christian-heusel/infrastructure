@@ -1,0 +1,15 @@
+---
+version: "3"
+
+services:
+{% for exporter in nextcloud_exporters %}
+  nextcloud_exporter-{{ exporter.name }}:
+    image: ghcr.io/xperimental/nextcloud-exporter
+    ports:
+      - {{ exporter.port }}:9205
+    environment:
+      NEXTCLOUD_SERVER: "{{ exporter.url }}"
+      NEXTCLOUD_AUTH_TOKEN: "{{ exporter.token }}"
+    restart: unless-stopped
+
+{% endfor %}

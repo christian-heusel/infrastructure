@@ -1,0 +1,3 @@
+---
+# defaults file for nextcloud-exporter
+nextcloud_exporter_project_dir: /opt/docker/nextcloud-exporter

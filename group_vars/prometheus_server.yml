@@ -1,0 +1,11 @@
+---
+nextcloud_exporters:
+  - name: ejtcloud
+    url: https://www.ejtcloud.de
+    token: "{{ lookup('gopass', 'websites/www.ejtcloud.de/serverinfo-token') }}"
+    port: 9205
+
+  - name: heuselcloud
+    url: https://cloud.heusel.eu
+    token: "{{ lookup('gopass', 'cloud-heusel-eu-serverinfo-token') }}"
+    port: 9206
