@@ -2,4 +2,5 @@
 - hosts: prometheus_server
   roles:
     - nextcloud-exporter
+    - fritzbox-exporter
     - prometheus

@@ -9,3 +9,9 @@ nextcloud_exporters:
     url: https://cloud.heusel.eu
     token: "{{ lookup('gopass', 'cloud-heusel-eu-serverinfo-token') }}"
     port: 9206
+
+fritzbox_exporter:
+  username: fritzbox-exporter
+  password: "{{ lookup('gopass', 'heuselfamily/fritzbox-exporter') }}"
+  gateway_url: http://192.168.71.1:49000
+  listen_port: 9042
