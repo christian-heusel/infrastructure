@@ -1,0 +1,9 @@
+---
+# defaults file for fritzbox-exporter
+fritzbox_exporter_project_dir: /opt/docker/fritzbox-exporter
+
+fritzbox_exporter:
+  username: fritzbox-exporter
+  password: password
+  gateway_url: http://192.168.178.1:49000
+  listen_port: 9042

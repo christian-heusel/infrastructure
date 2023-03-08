@@ -1,0 +1,12 @@
+---
+# tasks file for nextcloud-exporter
+
+- name: create the docker-compose project
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ (fritzbox_exporter_project_dir, 'docker-compose.yml') | path_join }}"
+
+- name: set up the docker-compose project
+  community.docker.docker_compose:
+    project_src: "{{ fritzbox_exporter_project_dir }}"
+    state: present
