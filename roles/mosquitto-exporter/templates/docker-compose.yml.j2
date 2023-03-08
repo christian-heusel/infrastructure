@@ -1,0 +1,19 @@
+---
+version: "3"
+
+services:
+{% for exporter in mosquitto_exporters %}
+  mosquitto_exporters-{{ exporter.name }}:
+    image: mosquitto_exporter.local.image
+    build:
+      context: .
+    ports:
+      - {{ exporter.port }}:9234
+    environment:
+      BROKER_ENDPOINT: "{{ exporter.url }}"
+      MQTT_USER: "{{ exporter.user }}"
+      MQTT_PASS: "{{ exporter.password }}"
+      MQTT_CLIENT_ID: "{{ exporter.client_id }}"
+    restart: unless-stopped
+
+{% endfor %}

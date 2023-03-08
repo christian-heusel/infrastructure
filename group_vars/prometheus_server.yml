@@ -15,3 +15,11 @@ fritzbox_exporter:
   password: "{{ lookup('gopass', 'heuselfamily/fritzbox-exporter') }}"
   gateway_url: http://192.168.71.1:49000
   listen_port: 9042
+
+mosquitto_exporters:
+  - name: broker
+    port: 9234
+    url: tcp://scotty-the-fifth.chris.vpn.heusel.eu:1883
+    user: "mosquitto-exporter"
+    password: "{{ lookup('gopass', 'heuselfamily/mqtt/mosquitto-exporter') }}"
+    client_id: "mosquitto-exporter"

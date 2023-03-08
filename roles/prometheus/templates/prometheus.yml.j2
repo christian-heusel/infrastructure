@@ -44,3 +44,8 @@ scrape_configs:
     static_configs:
       - targets:
         - scotty-the-fifth.chris.vpn.heusel.eu:9042
+
+  - job_name: mosquitto-exporter
+    static_configs:
+      - targets:
+        - scotty-the-fifth.chris.vpn.heusel.eu:9234

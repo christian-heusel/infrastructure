@@ -1,0 +1,11 @@
+---
+# defaults file for mosquitto-exporter
+mosquitto_exporter_project_dir: /opt/docker/mosquitto-exporter
+
+mosquitto_exporters:
+  - name: broker
+    port: 9234
+    url: tcp://127.0.0.1:1883
+    user: ""
+    password: ""
+    client_id: ""
