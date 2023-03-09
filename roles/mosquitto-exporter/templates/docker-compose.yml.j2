@@ -14,6 +14,6 @@ services:
       MQTT_USER: "{{ exporter.user }}"
       MQTT_PASS: "{{ exporter.password }}"
       MQTT_CLIENT_ID: "{{ exporter.client_id }}"
-    restart: unless-stopped
+    restart: always
 
 {% endfor %}
