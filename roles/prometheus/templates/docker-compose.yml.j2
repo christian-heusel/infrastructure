@@ -3,7 +3,7 @@ version: "3"
 
 services:
   prometheus:
-    image: prom/prometheus
+    image: prom/prometheus:v2.43.0-rc.0
     volumes:
       - ./config/prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
@@ -28,7 +28,7 @@ services:
   #   restart: unless-stopped
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:9.4.3
     volumes:
       - ./config/grafana/datasources:/etc/grafana/datasources
       - ./config/grafana/dashboards:/etc/grafana/dashboards
