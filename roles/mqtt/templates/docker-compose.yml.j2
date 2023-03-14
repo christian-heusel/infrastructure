@@ -9,7 +9,7 @@ services:
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
       - ./passwd:/mosquitto/config/passwd
-    restart: unless-stopped
+    restart: always
 
   mosquitto-exporter:
     image: sapcc/mosquitto-exporter
@@ -17,7 +17,7 @@ services:
       BROKER_ENDPOINT: "tcp://mqtt:1883"
       MQTT_USER: mosquitto-exporter
       MQTT_PASS: "{{ lookup('gopass', 'heuselfamily/mqtt/mosquitto-exporter') }}"
-    restart: unless-stopped
+    restart: always
 
   mqtt-exporter:
     image: kpetrem/mqtt-exporter
@@ -29,4 +29,4 @@ services:
       MQTT_PASSWORD: "{{ lookup('gopass', 'heuselfamily/mqtt/mqtt-exporter') }}"
     ports:
       - 8999:9000
-    restart: unless-stopped
+    restart: always

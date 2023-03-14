@@ -14,7 +14,7 @@ services:
       - "--storage.tsdb.retention.size=5GB"
     ports:
       - 127.0.0.1:9090:9090
-    restart: unless-stopped
+    restart: always
 
   # alertmanager:
   #   image: prom/alertmanager
@@ -25,7 +25,7 @@ services:
   #     - "--web.external-url=https://alertmanager.vpn.heusel.eu"
   #   ports:
   #     - 127.0.0.1:9093:9093
-  #   restart: unless-stopped
+  #   restart: always
 
   grafana:
     image: grafana/grafana:9.4.3
@@ -35,7 +35,7 @@ services:
       - grafana_data:/var/lib/grafana
     ports:
       - 127.0.0.1:3000:3000
-    restart: unless-stopped
+    restart: always
 
 volumes:
   prometheus_data:

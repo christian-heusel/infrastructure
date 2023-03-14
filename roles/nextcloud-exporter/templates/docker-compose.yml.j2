@@ -10,6 +10,6 @@ services:
     environment:
       NEXTCLOUD_SERVER: "{{ exporter.url }}"
       NEXTCLOUD_AUTH_TOKEN: "{{ exporter.token }}"
-    restart: unless-stopped
+    restart: always
 
 {% endfor %}

@@ -11,4 +11,4 @@ services:
       PASSWORD: "{{ fritzbox_exporter.password }}"
       GATEWAY_URL: "{{ fritzbox_exporter.gateway_url }}"
       LISTEN_ADDRESS: "0.0.0.0:9042"
-    restart: unless-stopped
+    restart: always
