@@ -49,3 +49,10 @@ scrape_configs:
     static_configs:
       - targets:
         - scotty-the-fifth.chris.vpn.heusel.eu:9234
+
+  - job_name: gitea
+    bearer_token: "{{ lookup('gopass', 'heuselfamily/gitea-prometheus-token') }}"
+    scheme: https
+    static_configs:
+      - targets:
+        - git.heusel.eu
