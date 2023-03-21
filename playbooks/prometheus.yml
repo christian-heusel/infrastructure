@@ -1,6 +1,7 @@
 ---
 - hosts: prometheus_server
   roles:
+    - aur
     - nextcloud-exporter
     - fritzbox-exporter
     - mosquitto-exporter-system
