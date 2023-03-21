@@ -11,14 +11,6 @@ services:
       - ./passwd:/mosquitto/config/passwd
     restart: always
 
-  mosquitto-exporter:
-    image: sapcc/mosquitto-exporter
-    environment:
-      BROKER_ENDPOINT: "tcp://mqtt:1883"
-      MQTT_USER: mosquitto-exporter
-      MQTT_PASS: "{{ lookup('gopass', 'heuselfamily/mqtt/mosquitto-exporter') }}"
-    restart: always
-
   mqtt-exporter:
     image: kpetrem/mqtt-exporter
     environment:
