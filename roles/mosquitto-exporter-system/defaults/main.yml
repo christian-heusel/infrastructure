@@ -1,0 +1,10 @@
+---
+# defaults file for mosquitto-exporter-system
+
+mosquitto_exporter:
+  name: broker
+  port: 9234
+  url: tcp://127.0.0.1:1883
+  user: ""
+  password: ""
+  client_id: ""

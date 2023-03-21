@@ -3,5 +3,5 @@
   roles:
     - nextcloud-exporter
     - fritzbox-exporter
-    - mosquitto-exporter
+    - mosquitto-exporter-system
     - prometheus

@@ -1,0 +1,19 @@
+---
+# tasks file for mosquitto-exporter
+
+- name: install the exporter
+  kewlfft.aur.aur:
+    name: prometheus-mosquitto-exporter
+    use: makepkg
+    state: present
+    aur_only: yes
+
+- name: set the exporter vars
+  ansible.builtin.template:
+    src: conf.j2
+    dest: "/etc/conf.d/prometheus-mosquitto-exporter"
+
+- name: start & enable the exporter
+  ansible.builtin.systemd:
+    name: "prometheus-mosquitto-exporter.service"
+    enabled: yes
