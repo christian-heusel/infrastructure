@@ -1,2 +1,7 @@
 ---
 # handlers file for mosquitto-exporter-system
+
+- name: restart the mosquitto exporter
+  ansible.builtin.systemd:
+    name: "prometheus-mosquitto-exporter.service"
+    state: restarted

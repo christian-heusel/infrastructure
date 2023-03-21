@@ -12,6 +12,7 @@
   ansible.builtin.template:
     src: conf.j2
     dest: "/etc/conf.d/prometheus-mosquitto-exporter"
+  notify: restart the mosquitto exporter
 
 - name: start & enable the exporter
   ansible.builtin.systemd:
