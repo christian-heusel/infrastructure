@@ -3,7 +3,7 @@
 
 - name: install the exporter
   kewlfft.aur.aur:
-    name: prometheus-mosquitto-exporter
+    name: prometheus-mosquitto-exporter-git
     use: makepkg
     state: present
     aur_only: yes
