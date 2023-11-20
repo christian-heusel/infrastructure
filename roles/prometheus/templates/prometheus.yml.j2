@@ -57,3 +57,9 @@ scrape_configs:
     static_configs:
       - targets:
         - git.heusel.eu
+
+  - job_name: gitea
+    scheme: https
+    static_configs:
+      - targets:
+        - rezepte.heusel.eu
